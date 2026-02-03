@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movie_ratings/screens/tabs.dart';
 
-// import 'package:movie_ratings/screens/dashboard.dart';
-import 'package:movie_ratings/screens/home.dart';
-
-Future<void> main() async {
-  await dotenv.load(fileName: ".env");
-
+void main() {
   runApp(const MyApp());
 }
 
@@ -15,6 +10,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeData.dark(), home: const HomeScreen());
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData.dark(),
+      home: const TabsScreen(),
+    );
   }
 }
