@@ -1,24 +1,29 @@
-// import 'dart:convert';
+import 'dart:convert';
 
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:movie_app/models/movie.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
+import 'package:movie_ratings/models/movie.dart';
 
-// class MovieApi {
-//   static String get _apiKey => dotenv.env['API_KEY'] ?? '';
-//   static String get _apiHost => dotenv.env['API_HOST'] ?? '';
-//   final String _baseUrl = 'https://movies-ratings2.p.rapidapi.com';
+class MovieApi {
+  static String get _apiKey => dotenv.env['TMDBAPI_KEY'] ?? '';
+  String get trendingAllUrl {
+    return 'https://api.themoviedb.org/3/trending/all/day?api_key=$_apiKey&language=en-US';
+  }
 
-//   static Map<String, String> headers = {
-//     'X-Rapidapi-Key': _apiKey,
-//     'X-Rapidapi-Host': _apiHost,
-//   };
+  Future<List<Movie>> trendingAll() async {
+    try {
+      final response = await http.get(Uri.parse(trendingAllUrl));
 
-//   Future<List<Movie>> getMovies() async {
-//     var url = Uri.parse('$_baseUrl/ratings?mediaType=movie');
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body)['results'];
 
-//     try {
-//       final response = await http.get(url, headers: headers);
-//     } catch (e) {}
-//   }
-// }
+        return data.map((movie) => Movie.fromMap(movie)).toList();
+      } else {
+        print('API Error: ${response.statusCode} - ${response.body}');
+        throw Exception('Failed to load trending all');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+}
