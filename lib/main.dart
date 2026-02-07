@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:movie_ratings/screens/home.dart';
-// import 'package:movie_ratings/screens/tabs.dart';
+
+import 'package:movie_ratings/screens/tabs.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
-      home: const HomeScreen(),
+      home: const TabsScreen(),
     );
   }
 }
