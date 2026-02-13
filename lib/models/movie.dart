@@ -9,6 +9,8 @@ class Movie {
   final double popularity;
   final String releaseDate;
   final String mediaType;
+  final double voteAverage;
+  final int voteCount;
 
   const Movie({
     required this.id,
@@ -21,6 +23,8 @@ class Movie {
     required this.popularity,
     required this.releaseDate,
     required this.mediaType,
+    required this.voteAverage,
+    required this.voteCount,
   });
 
   factory Movie.fromMap(Map<String, dynamic> map) {
@@ -35,6 +39,8 @@ class Movie {
       popularity: (map['popularity'] ?? 0.0).toDouble(),
       releaseDate: map['release_date'] ?? '',
       mediaType: map['media_type'] ?? '',
+      voteAverage: (map['vote_average'] ?? 0.0).toDouble(),
+      voteCount: map['id'].toInt(),
     );
   }
 }

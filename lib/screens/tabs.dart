@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:movie_ratings/screens/download.dart';
 import 'package:movie_ratings/screens/home.dart';
 import 'package:movie_ratings/screens/play_list.dart';
@@ -47,11 +48,7 @@ class _TabsScreenState extends State<TabsScreen> {
       appBar: AppBar(
         title: const Text(
           'Film Rate',
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: .w600,
-            color: Colors.white,
-          ),
+          style: TextStyle(fontSize: 28, fontWeight: .w600),
         ),
         actions: [
           IconButton(
