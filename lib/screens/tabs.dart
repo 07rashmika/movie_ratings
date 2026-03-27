@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:movie_ratings/screens/download.dart';
+import 'package:movie_ratings/screens/home.dart';
+import 'package:movie_ratings/screens/play_list.dart';
+import 'package:movie_ratings/screens/profile.dart';
+
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
 
@@ -22,17 +27,28 @@ Widget _dotNotification() {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+  final List<Widget> _pages = [
+    const HomeScreen(),
+    const PlayListScreen(),
+    const DownloadScreen(),
+    const ProfileScreen(),
+  ];
+
+  int _selectedPageIndex = 0;
+
+  void _selectPage(int index) {
+    setState(() {
+      _selectedPageIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Film Rate',
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: .w600,
-            color: Colors.white,
-          ),
+          style: TextStyle(fontSize: 28, fontWeight: .w600),
         ),
         actions: [
           IconButton(
@@ -43,8 +59,13 @@ class _TabsScreenState extends State<TabsScreen> {
           IconButton(onPressed: () {}, icon: _dotNotification(), iconSize: 32),
         ],
       ),
+      body: _pages[_selectedPageIndex],
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedPageIndex,
+        onTap: _selectPage,
         type: .fixed,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.blueGrey,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled, size: 32),
